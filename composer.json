@@ -1,0 +1,25 @@
+{
+    "name": "coldfox/yii2-kindeditor",
+    "type": "library",
+    "description": "kindeditor for yii2",
+    "keywords": ["kindeditor","yii2"],
+    "homepage": "http://kindeditor.net",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "coldfox"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "coldfox\\kindeditor\\": "vendor/coldfox/yii2-kindeditor"
+        }
+    },
+    "extra": {
+    }
+}
