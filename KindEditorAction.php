@@ -3,14 +3,10 @@ namespace coldfox\kindeditor;
 
 use Yii;
 use yii\base\Action;
+use yii\helpers\FileHelper;
 
 class KindEditorAction extends Action {
 
-    /**
-     *
-     * @var Array 保存配置的数组
-     */
-    public $config;
     public $php_path;
     public $php_url;
     public $root_path;
@@ -18,26 +14,31 @@ class KindEditorAction extends Action {
     public $save_path;
     public $save_url;
     public $max_size;
+    public $dir = 'uploads';
 
     //public $save_path;
     public function init() {
         //close csrf
         Yii::$app->request->enableCsrfValidation = false;
         //默认设置
-
+        $subDir = 'editor';
+        $fullDir = $this->dir.'/'.$subDir.'/';
        // $this->php_path =  dirname(__FILE__) . '/';
         $this->php_path =  $_SERVER['DOCUMENT_ROOT'] . '/';
         $this->php_url =  '/';
 //根目录路径，可以指定绝对路径，比如 /var/www/attached/
-        $this->root_path = $this->php_path . 'uploads/';
+        $this->root_path = $this->php_path . $fullDir;
 //根目录URL，可以指定绝对路径，比如 http://www.yoursite.com/attached/
-        $this->root_url = $this->php_url . 'uploads/';
+        $this->root_url = $this->php_url . $fullDir;
 //图片扩展名
 //            $ext_arr = ['gif', 'jpg', 'jpeg', 'png', 'bmp'],
 //文件保存目录路径
-        $this->save_path = $this->php_path . 'uploads/';
+        $this->save_path = $this->php_path .$fullDir;
 //文件保存目录URL
-        $this->save_url = $this->php_url . 'uploads/';
+        $this->save_url = $this->php_url . $fullDir;
+        if(!file_exists($this->save_path) || !is_dir($this->save_path)){
+            FileHelper::createDirectory($this->save_path);
+        }
 //定义允许上传的文件扩展名
 //            $ext_arr = array(
 //                'image' => array('gif', 'jpg', 'jpeg', 'png', 'bmp'),
